@@ -1,1 +1,2 @@
-# web_serber
+npm install
+npm start
