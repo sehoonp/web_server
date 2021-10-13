@@ -10,6 +10,21 @@ var database = require('./database/database')
 
 var app = express();
 
+//https
+var https = require('https');
+var fs = require('fs');
+var options = {
+    key: fs.readFileSync( './localhost.key' ),
+    cert: fs.readFileSync( './localhost.cert' ),
+    requestCert: false,
+    rejectUnauthorized: false
+};
+var port = process.env.PORT || 443;
+var server = https.createServer( options, app );
+server.listen( port, function () {
+    console.log( 'Express server listening on port ' + server.address().port );
+} );
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
